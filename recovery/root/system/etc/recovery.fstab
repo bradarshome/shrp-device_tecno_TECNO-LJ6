@@ -4,23 +4,23 @@
 
 #<src>							<mnt_point>		<type>		<mnt_flags and options>							<fs_mgr_flags>
 
-# Logical partitions (Dynamic Partitions via mapper)
-/dev/block/mapper/system		/system			auto		ro												wait,slotselect,logical
-/dev/block/mapper/vendor		/vendor			auto		ro												wait,slotselect,logical
-/dev/block/mapper/product		/product		auto		ro												wait,slotselect,logical
-/dev/block/mapper/system_ext	/system_ext		auto		ro												wait,slotselect,logical
-/dev/block/mapper/vendor_dlkm	/vendor_dlkm	auto		ro												wait,slotselect,logical
-/dev/block/mapper/odm_dlkm		/odm_dlkm		auto		ro												wait,slotselect,logical
+# Logical partitions (Dynamic Partitions)
+system							/system			auto		ro												wait,slotselect,logical
+vendor							/vendor			auto		ro												wait,slotselect,logical
+product							/product		auto		ro												wait,slotselect,logical
+system_ext						/system_ext		auto		ro												wait,slotselect,logical
+vendor_dlkm						/vendor_dlkm	auto		ro												wait,slotselect,logical
+odm_dlkm						/odm_dlkm		auto		ro												wait,slotselect,logical
 
 # Transsion partitions
-/dev/block/mapper/tr_carrier	/tr_carrier		auto		ro												wait,slotselect,logical,nofail
-/dev/block/mapper/tr_company	/tr_company		auto		ro												wait,slotselect,logical,nofail
-/dev/block/mapper/tr_mi			/tr_mi			auto		ro												wait,slotselect,logical,nofail
-/dev/block/mapper/tr_overlayfs	/tr_overlayfs	auto		ro												wait,slotselect,logical,nofail
-/dev/block/mapper/tr_preload	/tr_preload		auto		ro												wait,slotselect,logical,nofail
-/dev/block/mapper/tr_product	/tr_product		auto		ro												wait,slotselect,logical,nofail
-/dev/block/mapper/tr_region		/tr_region		auto		ro												wait,slotselect,logical,nofail
-/dev/block/mapper/tr_theme		/tr_theme		auto		ro												wait,slotselect,logical,nofail
+tr_carrier						/tr_carrier		auto		ro												wait,slotselect,logical,nofail
+tr_company						/tr_company		auto		ro												wait,slotselect,logical,nofail
+tr_mi							/tr_mi			auto		ro												wait,slotselect,logical,nofail
+tr_overlayfs					/tr_overlayfs	auto		ro												wait,slotselect,logical,nofail
+tr_preload						/tr_preload		auto		ro												wait,slotselect,logical,nofail
+tr_product						/tr_product		auto		ro												wait,slotselect,logical,nofail
+tr_region						/tr_region		auto		ro												wait,slotselect,logical,nofail
+tr_theme						/tr_theme		auto		ro												wait,slotselect,logical,nofail
 
 # Userdata partition
 /dev/block/by-name/metadata		/metadata		ext4		noatime,nosuid,nodev,discard					wait,check,formattable
