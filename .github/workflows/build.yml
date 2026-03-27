@@ -29,7 +29,7 @@ jobs:
         cd ~/shrp
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        repo init -u https://github.com/SHRP/manifest.git -b v12.1 --depth=1
+        repo init -u https://github.com/SHRP/manifest.git -b shrp-12.1 --depth=1
         
     - name: Sync Sources
       run: |
