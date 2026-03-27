@@ -1,0 +1,55 @@
+name: Build SHRP for TECNO-LJ6
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Build Environment
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y repo git-core gnupg flex bison gperf build-essential \
+          zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 \
+          lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev \
+          libgl1-mesa-dev libxml2-utils xsltproc unzip python3 python-is-python3
+        
+    - name: Initialize Repo
+      run: |
+        mkdir -p ~/shrp
+        cd ~/shrp
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        repo init -u https://github.com/SHRP/manifest.git -b v12.1 --depth=1
+        
+    - name: Sync Sources
+      run: |
+        cd ~/shrp
+        repo sync -j$(nproc --all) --force-sync --no-tags-bundle --no-clone-bundle --prune --depth=1
+        
+    - name: Clone Device Tree
+      run: |
+        cd ~/shrp
+        git clone https://github.com/${{ github.repository }}.git device/tecno/TECNO-LJ6
+        
+    - name: Build SHRP
+      run: |
+        cd ~/shrp
+        source build/envsetup.sh
+        lunch shrp_LJ6-eng
+        mka recoveryimage
+        
+    - name: Upload Recovery Image
+      uses: actions/upload-artifact@v4
+      with:
+        name: SHRP-TECNO-LJ6-${{ github.sha }}
+        path: ~/shrp/out/target/product/TECNO-LJ6/recovery.img
