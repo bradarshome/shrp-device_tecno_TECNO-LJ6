@@ -39,5 +39,5 @@ TW_DEFAULT_BRIGHTNESS := 1023
 TW_MAX_BRIGHTNESS := 2047
 
 # Vibrator
-TW_VIBRATOR_TIMEOUT_FILE := "/sys/class/leds/vibrator/duration"
-TW_VIBRATOR_ACTIVATE_FILE := "/sys/class/leds/vibrator/activate"
+TW_VIBRATOR_TIMEOUT_FILE := "/sys/class/leds/vibrator_single/duration"
+TW_VIBRATOR_ACTIVATE_FILE := "/sys/class/leds/vibrator_single/activate"
