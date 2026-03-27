@@ -11,3 +11,7 @@ $(call inherit-product, device/transsion/mt6789-common/common.mk)
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_RETAIN_PERSISTENT_PARTITIONS := true
+
+# Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.dynamic_partitions=true
