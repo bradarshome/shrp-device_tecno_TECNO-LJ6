@@ -32,3 +32,12 @@ SHRP_INTERNAL := /sdcard
 SHRP_OTG := /usb_otg
 SHRP_FLASH := 1
 SHRP_REC := /dev/block/by-name/vendor_boot
+
+# Brightness
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_DEFAULT_BRIGHTNESS := 1023
+TW_MAX_BRIGHTNESS := 2047
+
+# Vibrator
+TW_VIBRATOR_TIMEOUT_FILE := "/sys/class/leds/vibrator/duration"
+TW_VIBRATOR_ACTIVATE_FILE := "/sys/class/leds/vibrator/activate"
