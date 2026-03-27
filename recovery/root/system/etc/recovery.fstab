@@ -2,31 +2,31 @@
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
-#<src>								<mnt_point>		<type>		<mnt_flags and options>							<fs_mgr_flags>
+#<src>					<mnt_point>		<type>		<mnt_flags and options>					<fs_mgr_flags>
 
-# Logical partitions (Dynamic Partitions)
-/dev/block/mapper/system_a			/system			auto		ro												wait,check
-/dev/block/mapper/vendor_a			/vendor			auto		ro												wait,check
-/dev/block/mapper/product_a			/product		auto		ro												wait,check
-/dev/block/mapper/system_ext_a		/system_ext		auto		ro												wait,check
-/dev/block/mapper/vendor_dlkm_a		/vendor_dlkm	auto		ro												wait,check
-/dev/block/mapper/odm_dlkm_a		/odm_dlkm		auto		ro												wait,check
+# Logical partitions (Dynamic Partitions) - slotselect will auto-detect active slot
+system					/system			auto		ro										wait,slotselect,logical
+vendor					/vendor			auto		ro										wait,slotselect,logical
+product					/product		auto		ro										wait,slotselect,logical
+system_ext				/system_ext		auto		ro										wait,slotselect,logical
+vendor_dlkm				/vendor_dlkm	auto		ro										wait,slotselect,logical
+odm_dlkm				/odm_dlkm		auto		ro										wait,slotselect,logical
 
 # Transsion partitions
-/dev/block/mapper/tr_carrier_a		/tr_carrier		auto		ro												wait,nofail
-/dev/block/mapper/tr_company_a		/tr_company		auto		ro												wait,nofail
-/dev/block/mapper/tr_mi_a			/tr_mi			auto		ro												wait,nofail
-/dev/block/mapper/tr_preload_a		/tr_preload		auto		ro												wait,nofail
-/dev/block/mapper/tr_product_a		/tr_product		auto		ro												wait,nofail
-/dev/block/mapper/tr_region_a		/tr_region		auto		ro												wait,nofail
-/dev/block/mapper/tr_theme_a		/tr_theme		auto		ro												wait,nofail
+tr_carrier				/tr_carrier		auto		ro										wait,slotselect,logical,nofail
+tr_company				/tr_company		auto		ro										wait,slotselect,logical,nofail
+tr_mi					/tr_mi			auto		ro										wait,slotselect,logical,nofail
+tr_preload				/tr_preload		auto		ro										wait,slotselect,logical,nofail
+tr_product				/tr_product		auto		ro										wait,slotselect,logical,nofail
+tr_region				/tr_region		auto		ro										wait,slotselect,logical,nofail
+tr_theme				/tr_theme		auto		ro										wait,slotselect,logical,nofail
 
 # Userdata partition
-/dev/block/by-name/metadata			/metadata		ext4		noatime,nosuid,nodev,discard					wait,check,formattable
-/dev/block/mapper/userdata			/data			f2fs		noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt	wait,check,formattable,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
+/dev/block/by-name/metadata	/metadata	ext4		noatime,nosuid,nodev,discard			wait,check,formattable
+/dev/block/by-name/userdata	/data		f2fs		noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt	wait,check,formattable,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
 
 # Misc
-/dev/block/by-name/misc				/misc			emmc		defaults										defaults
+/dev/block/by-name/misc		/misc		emmc		defaults								defaults
 
 # Cache (tranfs)
-/dev/block/by-name/tranfs			/cache			ext4		noatime,nosuid,nodev,discard					wait,check,formattable
+/dev/block/by-name/tranfs	/cache		ext4		noatime,nosuid,nodev,discard			wait,check,formattable
